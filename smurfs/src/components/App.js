@@ -1,5 +1,11 @@
-import React, { Component } from 'react';
-import './App.css';
+import React, { Component } from "react";
+import "./App.css";
+import { connect } from "react-redux";
+
+import { fetchSmurfs, addSmurf, deleteSmurf } from "../actions";
+import SmurfList from "./SmurfList";
+import SmurfForm from "./SmurfForm";
+
 /*
  to wire this component up you're going to need a few things.
  I'll let you do this part on your own. 
@@ -19,4 +25,19 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  console.log(state);
+  return {
+    smurfs: state.smurfs,
+    fetchingSmurfs: state.fetchingSmurfs
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  {
+    fetchSmurfs,
+    addNewSmurf,
+    deleteSmurf
+  }
+)(App);
